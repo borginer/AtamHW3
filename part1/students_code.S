@@ -129,12 +129,6 @@ valid_size_HW3:
 rows_loop_HW3:
 	movl $0, -8(%rbp) # j = res colls
 cols_loop_HW3:
-	# %rdi is mat_a
-	# %rsi is mat_b
-	# %edx is row_a
-	# %ecx is col_b
-	# %r8d is max_col_a
-	# %r9d is max_col_b
 
 	push_caller_saved
 	movq %rsi, %rdi
@@ -161,7 +155,7 @@ cols_loop_HW3:
 	call set_element_in_matrix
 	pop_caller_saved
 
-
+	
 	incl -8(%rbp)
 	cmpl %r15d, -8(%rbp)
 	jnz cols_loop_HW3
