@@ -4,7 +4,7 @@ void my_store_idt(struct desc_ptr *idtr) {
     asm volatile (
         "SIDT %0"
         :
-        : "m" (idtr)
+        : "m" (*idtr)
     );
 }
 
@@ -12,7 +12,7 @@ void my_load_idt(struct desc_ptr *idtr) {
     asm volatile (
         "LIDT %0"
         :
-        : "m" (idtr)
+        : "m" (*idtr)
     );
 }
 
@@ -27,7 +27,7 @@ unsigned long my_get_gate_offset(gate_desc *gate) {
 
     offset += gate->offset_low;
     offset += (unsigned long)gate->offset_middle << 16;
-    offset += (unsigned long)gate->offset_middle << 32;
+    offset += (unsigned long)gate->high << 32;
 
     return offset;
 }
