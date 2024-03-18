@@ -7,6 +7,7 @@ my_ili_handler:
 
   pushq %rax
 	pushq %rdi
+  pushq %rbx
 	pushq %rsi
 	pushq %rdx
 	pushq %rcx
@@ -44,12 +45,14 @@ call_old_handler_HW3:
 	popq %rcx
 	popq %rdx
 	popq %rsi
+  popq %rbx
 	popq %rdi
 	popq %rax
   jmp *old_ili_handler
   iretq
 
 normal_return_HW3:
+  addq %rbx, (%rsp)
 
 	popq %r11
 	popq %r10
@@ -58,8 +61,9 @@ normal_return_HW3:
 	popq %rcx
 	popq %rdx
 	popq %rsi
+  popq %rbx
 	popq %rdi
-  movq %rax, %rdi # can't use my macro :(
+  movq %rax, %rdi
   popq %rax
-  addq %rbx, (%rsp)
+  
   iretq
