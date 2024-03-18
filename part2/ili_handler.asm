@@ -7,7 +7,7 @@ my_ili_handler:
 
   pushq %rax
 	pushq %rdi
-  # pushq %rbx
+  pushq %rbx
 	pushq %rsi
 	pushq %rdx
 	pushq %rcx
@@ -20,7 +20,7 @@ my_ili_handler:
   xorq %rax, %rax
   xorq %rdi, %rdi
 
-  movq 72(%rsp), %rax # get rip after pushing regs
+  movq 80(%rsp), %rax # get rip after pushing regs
   movw (%rax), %ax # get opcode
   
   cmpb $0x0F, %al
@@ -45,14 +45,14 @@ call_old_handler_HW3:
 	popq %rcx
 	popq %rdx
 	popq %rsi
-  # popq %rbx
+  popq %rbx
 	popq %rdi
 	popq %rax
   jmp *old_ili_handler
   iretq
 
 normal_return_HW3:
-  
+  addq %rbx, 80(%rsp)
 
 	popq %r11
 	popq %r10
@@ -61,10 +61,9 @@ normal_return_HW3:
 	popq %rcx
 	popq %rdx
 	popq %rsi
-  # popq %rbx
+  popq %rbx
 	popq %rdi
   movq %rax, %rdi
   popq %rax
-  
-  addq %rbx, (%rsp)
+
   iretq
