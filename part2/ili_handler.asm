@@ -20,7 +20,7 @@ my_ili_handler:
   xorq %rax, %rax
   xorq %rdi, %rdi
 
-  movq 80(%rsp), %rax # get rip after pushing regs
+  movq 72(%rsp), %rax # get rip after pushing regs
   movw (%rax), %ax # get opcode
   
   cmpb $0x0F, %al
