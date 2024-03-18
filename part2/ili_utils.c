@@ -1,15 +1,19 @@
 #include <asm/desc.h>
 
 void my_store_idt(struct desc_ptr *idtr) {
-// <STUDENT FILL> - HINT: USE INLINE ASSEMBLY
-
-// </STUDENT FILL>
+    asm volatile (
+        "SIDT %0"
+        :
+        : "m" (idtr)
+    );
 }
 
 void my_load_idt(struct desc_ptr *idtr) {
-// <STUDENT FILL> - HINT: USE INLINE ASSEMBLY
-
-// <STUDENT FILL>f
+    asm volatile (
+        "LIDT %0"
+        :
+        : "m" (idtr)
+    );
 }
 
 void my_set_gate_offset(gate_desc *gate, unsigned long addr) {
