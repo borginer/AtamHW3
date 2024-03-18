@@ -28,7 +28,7 @@ my_ili_handler:
   addq $1, %rbx
 one_byte_opcode_HW3:
   addq $1, %rbx
-  movb %al, %dil
+  movzbq %al, %rdi
 
   call what_to_do
 
